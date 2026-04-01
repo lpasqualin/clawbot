@@ -1,11 +1,43 @@
+# Secrets and credentials
 *.env
+*.env.*
 *.key
 *.pem
+*.token
 secrets/
+config/openclaw.json
+openclaw.json
+
+# Runtime data and logs
 *.log
+*.log.*
+migration-restore/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Node
 node_modules/
-migration-restore/
+package-lock.json
+yarn.lock
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
 .claude/settings.local.json
