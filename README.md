@@ -2,15 +2,15 @@
 
 **A live, self-hosted multi-agent operator stack running on OpenClaw.**
 
-ClawBot is a personal AI chief-of-staff and operator system. It runs five specialized agents — ClawBot (orchestrator), Vito (sales), Oracle (research), Tron (developer), and a rotating cast of specialists — each with defined roles, permissions, and escalation paths. Real operations. Real governance. Not a demo.
+ClawBot is a personal AI chief-of-staff and operator system. It runs six specialized agents — ClawBot (orchestrator), Vito (sales), Oracle (research), Tron (developer), Belfort (trader), and Harley (content) — each with defined roles, permissions, and escalation paths. Real operations. Real governance. Not a demo.
 
 ---
 
 ## What Is This?
 
-ClawBot is the running instance of a governed multi-agent system. It handles daily operations: task management, research, outreach, system development, and market analysis. The orchestrator (ClawBot) routes work to the right specialist based on intent, domain, and risk level — without the operator having to manage agent selection.
+ClawBot is the running instance of a governed multi-agent system. It handles daily operations: task management, research, outreach, system development, market analysis, and content strategy. The orchestrator (ClawBot) routes work to the right specialist based on intent, domain, and risk level — without the operator having to manage agent selection.
 
-This repo documents the architecture, agent fleet, governance rules, and operational philosophy of a system that is actually running.
+This repo is the **public reference mirror** for ClawBot's non-sensitive operating system: the actual governance files, agent definitions, and operational doctrine that the system runs on — sanitized for public sharing.
 
 ## Why Does It Exist?
 
@@ -23,34 +23,68 @@ Most AI "agent" projects are either demos or framework explorations. ClawBot is 
 
 ## What Makes It Interesting?
 
-- **Five-agent fleet** with distinct roles, capability boundaries, and escalation paths
-- **Formal governance layer** — permission policy covers every action category from `pure_read` to `irreversible_mutation`
-- **Routing doctrine** — ClawBot's ORCHESTRATION.md defines when to delegate vs. handle directly, how to package handoffs, and what the output review standard is
+- **Six-agent fleet** with distinct roles, capability boundaries, and escalation paths
+- **Formal governance layer** — permission policy covers every action category; enforced by the orchestrator
+- **Routing doctrine** — ORCHESTRATION.md defines when to delegate vs. handle directly, how to package handoffs, and what the output review standard is
 - **Skills as tools** — agents have access to a skill library covering CRM, outreach, research, dev tooling, crypto data, and more
 - **File-based memory** — durable operational context persists in markdown files that survive runtime swaps and agent restarts
-- **Built on OpenClaw** — a lightweight, self-hosted LLM gateway running locally with a fallback model chain
-
-## Current State
-
-Running in production on a self-hosted Ubuntu 24.04 machine. Five agents active. ClawBot handles daily ops; specialist agents are invoked by delegation. Governance, routing, and handoff standards are enforced at the orchestrator level.
-
-The architecture is intentionally documented here rather than embedded only in runtime config — so the design is legible to anyone reading the code.
+- **Built on OpenClaw** — a lightweight, self-hosted LLM gateway running locally with a deterministic fallback model chain
 
 ## How to Explore This Repo
 
 ```
 clawbot/
-├── README.md            # This file — what ClawBot is and why it exists
-├── ARCHITECTURE.md      # System design, model stack, runtime overview
-├── AGENT_FLEET.md       # Each agent: role, capabilities, boundaries
-├── GOVERNANCE.md        # Permission policy, escalation rules, hard limits
-├── SKILLS.md            # Skill library: tools each agent can use
-├── MEMORY_PHILOSOPHY.md # Why file-based memory, how continuity works
-└── OPERATIONS.md        # Routing doctrine, heartbeat, handoff standards
+├── governance/                  # The actual operational doctrine files
+│   ├── SOUL.md                  # ClawBot's identity and core principles
+│   ├── ORCHESTRATION.md         # Full delegation and routing doctrine
+│   ├── ROUTING.md               # Intent classification and system-of-record routing
+│   ├── PERMISSIONS.md           # Per-agent permission matrix and approval rules
+│   ├── AGENT_ROLES.md           # Role boundaries for each specialist
+│   └── DELEGATION_TEMPLATE.md   # Standard handoff format
+│
+├── docs/
+│   ├── architecture.md          # System design, model stack, runtime overview
+│   ├── memory-system.md         # Why file-based memory, how continuity works
+│   ├── morning-brief.md         # Morning brief doctrine and format
+│   ├── heartbeat.md             # Monitoring thresholds and alert rules
+│   ├── todoist-structure.md     # Task system routing and anti-patterns
+│   └── agent-fleet/             # Each agent's identity and operational definition
+│       ├── vito.md              # Sales & Revenue
+│       ├── oracle.md            # Research & Intelligence
+│       ├── tron.md              # Developer / Automation / Systems
+│       ├── belfort.md           # Trader / Capital Allocator
+│       └── harley.md            # Content & Monetization
+│
+├── examples/
+│   ├── openclaw.example.json    # Sanitized config shape for OpenClaw
+│   ├── MEMORY.example.md        # MEMORY.md format template
+│   └── HEARTBEAT.example.md     # Example heartbeat output
+│
+├── decisions/
+│   └── 2026-03-31-repo-structure.md  # Why this repo is structured as it is
+│
+├── SKILLS.md                    # Skill library by agent
+└── .gitignore
 ```
 
-Start at `AGENT_FLEET.md` to understand who does what.
-Then read `GOVERNANCE.md` to understand what requires approval.
-Then read `OPERATIONS.md` for the orchestration doctrine.
+**Where to start:**
+- Start at `governance/SOUL.md` to understand what ClawBot is at the core.
+- Read `governance/ORCHESTRATION.md` for the routing and delegation doctrine.
+- Read `governance/PERMISSIONS.md` to understand what requires approval.
+- Read `docs/agent-fleet/` to understand who does what.
 
-The runtime config, secrets, and host-specific setup live in a private repo (`clawbot-runtime`).
+## Three-Repo Model
+
+| Repo | What it contains |
+|------|-----------------|
+| `agent-os` | Framework/product: portable spec, capability taxonomy, adapter contracts |
+| `clawbot` (this repo) | Public doctrine mirror: governance, agent definitions, operational philosophy |
+| `clawbot-runtime` (private) | Live runtime: host config, secrets, service definitions |
+
+The `clawbot-runtime` private repo contains the host-specific OpenClaw configuration, secrets management, and service definitions that are not suitable for public documentation.
+
+## Current State
+
+Running in production on a self-hosted Ubuntu machine. Six agents active. ClawBot handles daily ops; specialist agents are invoked by delegation. Governance, routing, and handoff standards are enforced at the orchestrator level.
+
+The architecture is intentionally documented here rather than embedded only in runtime config — so the design is legible to anyone reading the code.

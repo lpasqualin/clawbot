@@ -1,4 +1,6 @@
-# MEMORY_PHILOSOPHY.md — Why File-Based Memory
+# memory-system.md — Why File-Based Memory
+
+_Source: MEMORY_PHILOSOPHY.md_
 
 ## The Design Choice
 
@@ -63,6 +65,26 @@ Specialists maintain their own memory. The orchestrator (ClawBot) maintains the 
 
 ---
 
+## What Belongs in MEMORY.md
+
+**Belongs here:**
+- Facts about the operator: role, goals, responsibilities, strategic model
+- Strategic decisions and project priorities
+- Infrastructure state changes
+- Preferences and working style
+- Explicit decisions that must inform future behavior
+- Open loops and risks that must not drift
+
+**Does not belong here:**
+- Daily logs (→ `memory/YYYY-MM-DD.md`)
+- Task lists (→ Todoist)
+- Long-form plans (→ Obsidian)
+- Research and meeting notes (→ Obsidian)
+- Temporary status (→ Workspace)
+- Anything that belongs in a dedicated system of record
+
+---
+
 ## Memory Maintenance
 
 Periodic memory maintenance is built into the heartbeat cycle:
@@ -72,3 +94,5 @@ Periodic memory maintenance is built into the heartbeat cycle:
 4. Remove outdated entries
 
 This is not automated — it's agent-driven, with the agent making judgment calls about what to keep. The result is a memory that reflects operational reality rather than a raw append-only log.
+
+See `examples/MEMORY.example.md` for a sanitized example of the file format.
