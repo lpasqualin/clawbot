@@ -1,0 +1,7 @@
+[Service]
+Environment="GOG_KEYRING_PASSWORD=YOUR_GOG_KEYRING_PASSWORD"
+Environment="GOG_ACCOUNT=YOUR_GOG_ACCOUNT_EMAIL"
+Environment=PATH=/home/YOUR_USER/gogcli/bin:/home/YOUR_USER/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStartPost=/bin/bash -c 'sleep 15 && /home/YOUR_USER/.openclaw/failover-notify.sh &'
+Environment=TAVILY_API_KEY=YOUR_TAVILY_API_KEY
+Environment=GATEWAY_AUTH_TOKEN=YOUR_GATEWAY_AUTH_TOKEN

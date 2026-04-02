@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sudo -n tee /etc/systemd/system/openclaw.service.d/override.conf)",
+      "Bash(/dev/null:*)",
+      "Bash(curl -s http://127.0.0.1:18789/health)",
+      "Bash(find /home/clawbot/.openclaw -name *.json)",
+      "Bash(for path:*)",
+      "Bash(do)",
+      "Bash(echo -n \"$path: \")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:18789$path)",
+      "Bash(done)",
+      "Bash(curl:*)",
+      "Bash(for port:*)",
+      "Bash(echo -n \"port $port /health: \")",
+      "Bash(systemctl cat:*)",
+      "Bash(su -s /bin/bash clawbot -c 'ls -la /home/clawbot/.openclaw/cron/ && echo \"\"---\"\" && ls -la /home/clawbot/.openclaw/telegram/')",
+      "Bash(echo \"su failed: $?\")",
+      "Bash(sudo -n bash -c 'find /home/clawbot/.openclaw/cron/ -maxdepth 3 | head -20' 2>&1)",
+      "Bash(journalctl:*)",
+      "Bash(for skill:*)",
+      "Bash(echo \"=== $skill ===\")",
+      "Read(//home/clawbot/.openclaw/workspace/skills/$skill/**)",
+      "Read(//home/clawbot/.openclaw/skills/$skill/**)",
+      "Bash(runuser -l clawbot -c '/home/clawbot/.npm-global/bin/openclaw cron list 2>/dev/null')",
+      "Bash(python3 -m json.tool)",
+      "Bash(timedatectl status:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)",
+      "Bash(systemd-run:*)",
+      "Bash(sudo -n -u clawbot bash -c 'find /home/clawbot/.openclaw/cron/ -type f | sort | xargs -I{} sh -c \"echo === {} ===; cat {}; echo\"' 2>&1)",
+      "Bash(sudo -u clawbot cat /home/clawbot/.openclaw/cron/jobs.json)",
+      "Bash(systemctl list-units:*)",
+      "Bash(ollama list:*)",
+      "Bash(npm list:*)",
+      "Bash(tailscale ip:*)",
+      "Bash(sudo -u leo-paz systemctl --user list-units --type=service --state=running --no-pager)",
+      "Skill(update-config)"
+    ]
+  }
+}

@@ -41,3 +41,14 @@ Thumbs.db
 
 # Claude Code
 .claude/settings.local.json
+*.sqlite
+node_modules/
+.venv/
+.cache/
+openclaw/agents/*/sessions/
+openclaw/delivery-queue/
+openclaw/logs/
+openclaw/memory/main.sqlite
+openclaw/openclaw.json
+systemd/openclaw.service.d/override.conf
+etc/openclaw.env

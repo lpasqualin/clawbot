@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "fe560917-5cd8-41e4-80ac-3852f3cfa3b9",
+      "name": "Morning Brief",
+      "enabled": true,
+      "createdAtMs": 1773202598214,
+      "updatedAtMs": 1775127751176,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 7 * * *",
+        "tz": "America/New_York"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "This is a DAILY AUTOMATED REPORT. Be concise, structured, and factual. Do not chat. Do not explain. Do not add commentary.\n\nYou are generating [OPERATOR]'s morning briefing. You are ClawBot acting as [OPERATOR]'s Chief of Staff.\n\nYou MUST use registered skills. You MUST NOT use bash, shell, CLI, or wrappers if a registered skill exists for that capability. You MUST call skills in the exact order listed. You MUST continue even if a skill fails. You MUST NOT hallucinate data. If a tool fails, omit that section and continue.\n\nSKILL ORDER (MANDATORY):\n1. `weather` - current conditions + today's forecast for Fort Lauderdale, FL (26.12, -80.14)\n2. `gog` - Google Calendar events next 48 hours (YOUR_GOOGLE_ACCOUNT)\n3. `todoist` - overdue tasks, due today, next 3 upcoming by due date\n4. `gmail` - 2-5 unread important emails from Primary inbox; 2-5 from Updates\n5. `tavily` - 3-5 signals relevant to [OPERATOR]'s work: AI, agents, automation, gov tech, consulting, LLMs\n\nIf any skill fails -> skip that section. Do NOT retry more than once.\n\nOUTPUT FORMAT (STRICT - do not deviate):\n\n🌅 MORNING BRIEF - [date]\n\n🌤 Weather\n[conditions, high/low]\n\n📅 Calendar\n[events next 48h, or 'No events scheduled']\n\n✅ Tasks\nOverdue:\n- [task]\n\nDue Today:\n- [task]\n\nUpcoming:\n- [task]\n\n📥 Inbox\nPrimary:\n- [sender - subject]\n\nUpdates:\n- [sender - subject]\n\n📈 Business Pulse\n- [signal]\n- [signal]\n- [signal]\n\n🎯 The Read\n[One sentence connecting today's signals to [OPERATOR]'s strategy]\n\n🎯 Today's Edge\n[One high-leverage action [OPERATOR] should take today — specific and concrete. Base it on: open tasks and deadlines, active projects (ClawBot, Agent OS, BBS, Siftwise), calendar gaps and available time, any urgent signals from email or news. Not \"work on BBS\" — give an actual concrete action.]\n\n⚠️ Watchouts\n[Deadlines, risks, or time-sensitive items coming up in the next 7 days. Skip this section if nothing notable.]"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "YOUR_TELEGRAM_ID"
+      },
+      "state": {
+        "nextRunAtMs": 1775214000000,
+        "lastRunAtMs": 1775127600007,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 151169,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 0,
+        "lastDelivered": true
+      }
+    },
+    {
+      "id": "c301fd23-cd7b-4454-97fb-ef9b393d8f6f",
+      "name": "Afternoon Check-in",
+      "enabled": true,
+      "createdAtMs": 1773246225280,
+      "updatedAtMs": 1775154672343,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 14 * * *",
+        "tz": "America/New_York"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "You are generating [OPERATOR]'s afternoon check-in briefing. Follow these steps exactly:\n\n1. Retrieve Todoist tasks: any new urgent or overdue tasks not yet completed.\n2. Retrieve Google Calendar events for the rest of today and tonight using the account YOUR_GOOGLE_ACCOUNT.\n3. Retrieve important emails from the Primary inbox received since this morning using:\n   /home/clawbot/gogcli/bin/gog gmail search \"in:primary is:important newer_than:1d\" --max 10 --account YOUR_GOOGLE_ACCOUNT --json\n   For each thread, note the subject, sender, and a one-line summary.\n4. Retrieve notable items from the Updates label received since this morning using:\n   /home/clawbot/gogcli/bin/gog gmail search \"label:updates newer_than:1d\" --max 10 --account YOUR_GOOGLE_ACCOUNT --json\n   Pick the 3-5 most interesting/notable items and note the subject and sender.\n5. Use Tavily to search for 1-3 significant news or business developments that broke since this morning.\n6. Produce the briefing using the exact format below.\n\nDo not perform additional searches. Do not add extra sections. If any tool fails, continue generating the briefing with the information available. Do not stop execution.\n\nFORMAT:\n\n☀️ AFTERNOON CHECK-IN — [today's date, time]\n\n⚡ Urgent / New Tasks\n[Any overdue tasks or newly added urgent tasks since morning, or 'Nothing new — on track']\n\n📅 Rest of Day\n[Calendar events remaining today from YOUR_GOOGLE_ACCOUNT, or 'Nothing on the calendar']\n\n📧 Email\nImportant (Primary inbox):\n[Each important email since this morning: sender — subject — one-line summary. Or 'No new important emails']\n\nUpdates:\n[3-5 notable items from the Updates label since this morning: sender — subject. Or 'No updates']\n\n📡 Since This Morning\n[1-3 significant news or business developments since morning, or 'Nothing significant']\n\n🔧 Best Next Move\n[Based on time remaining today, energy, open tasks, and active projects — one specific action [OPERATOR] should work on next and a brief explanation of why.]"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "YOUR_TELEGRAM_ID"
+      },
+      "state": {
+        "nextRunAtMs": 1775241000000,
+        "consecutiveErrors": 0,
+        "lastDelivered": true,
+        "lastRunAtMs": 1775154600010,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 72333,
+        "lastDeliveryStatus": "delivered"
+      }
+    },
+    {
+      "id": "2a72e26d-26d5-4128-a20b-8ece468f7a5c",
+      "name": "Night Wrap-up",
+      "enabled": true,
+      "createdAtMs": 1773246225280,
+      "updatedAtMs": 1775091650685,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "America/New_York"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "You are generating [OPERATOR]'s nightly wrap-up briefing. Follow these steps exactly:\n\n1. Retrieve tasks completed today: use the Todoist skill to fetch completed tasks with filter completed today. The skill handles authentication. Each result has a content and completed_at field.\n2. Retrieve Todoist tasks still open (overdue or due today that are not completed): use the Todoist skill with filter \"overdue | today\".\n3. Retrieve Todoist tasks due tomorrow: use the Todoist skill with filter \"tomorrow\".\n4. Retrieve Google Calendar events for tomorrow using the account YOUR_GOOGLE_ACCOUNT.\n5. Retrieve any important emails from the Primary inbox that arrived today and haven't been actioned using:\n   /home/clawbot/gogcli/bin/gog gmail search \"in:primary is:important is:unread newer_than:1d\" --max 10 --account YOUR_GOOGLE_ACCOUNT --json\n   For each thread, note the subject, sender, and a one-line summary.\n6. Retrieve notable items from the Updates label from today using:\n   /home/clawbot/gogcli/bin/gog gmail search \"label:updates newer_than:1d\" --max 5 --account YOUR_GOOGLE_ACCOUNT --json\n   Pick the 1-3 most interesting items and note the subject and sender.\n7. Produce the briefing using the exact format below.\n\nDo not search the web. Do not add extra sections. If any tool fails, continue generating the briefing with the information available. Do not stop execution.\n\nFORMAT:\n\n🌙 NIGHT WRAP-UP — [today's date]\n\n✅ Completed Today\n[Count meaningful progress broadly — not just closed Todoist tasks. Include: work shifts, scheduling, quotes, applications, payments, paperwork, life logistics, ClawBot improvements, Agent OS development, BBS work, Siftwise work, research or planning that moved a project forward. Do not describe the day as \"light\" if meaningful progress happened. Frame in terms of momentum and progress.]\n\n📋 Still Open\n[Overdue or due-today tasks not yet completed, or 'All clear']\n\n📧 Email\nUnread Important (Primary inbox):\n[Any important unread emails from today: sender — subject — one-line summary. Or 'Inbox clear']\n\nUpdates:\n[1-3 notable items from the Updates label today: sender — subject. Or 'Nothing notable']\n\n📆 Tomorrow\n[Tasks due tomorrow; calendar events tomorrow from YOUR_GOOGLE_ACCOUNT; or 'Nothing scheduled']\n\n🚀 Tomorrow's Leverage\n[The one action tomorrow that would move life or business forward the most. Think strategically — not just calendar. What creates the most leverage?]\n\nMemory Rule: If any important information surfaced today (decisions, new projects, deadlines, contacts, infrastructure changes, preferences, anything related to Agent OS / ClawBot / BBS / Siftwise), write it to MEMORY.md before closing."
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "to": "YOUR_TELEGRAM_ID"
+      },
+      "state": {
+        "nextRunAtMs": 1775178000000,
+        "consecutiveErrors": 0,
+        "lastDelivered": true,
+        "lastRunAtMs": 1775091600008,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 50677,
+        "lastDeliveryStatus": "delivered"
+      }
+    }
+  ]
+}

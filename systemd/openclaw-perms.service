@@ -1,0 +1,17 @@
+[Unit]
+Description=Fix OpenClaw workspace permissions for leo-paz
+After=openclaw.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/chmod g+rx /home/clawbot/.openclaw
+ExecStart=/bin/chmod g+rx /home/clawbot/.openclaw/workspace
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace-vito
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace-oracle
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace-tron
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace-belfort
+ExecStart=/bin/chmod -R g+w /home/clawbot/.openclaw/workspace-harley
+
+[Install]
+WantedBy=multi-user.target

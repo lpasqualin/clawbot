@@ -1,0 +1,7 @@
+[Unit]
+Description=ClawBot private repo daily sync
+
+[Service]
+Type=oneshot
+User=leo-paz
+ExecStart=/home/leo-paz/repos/clawbot-runtime/scripts/clawbot-sync.sh

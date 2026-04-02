@@ -1,0 +1,7 @@
+[Unit]
+Description=Auto daemon-reload on openclaw unit change
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl daemon-reload
+ExecStartPost=/bin/systemctl restart openclaw.service

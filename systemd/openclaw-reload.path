@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch for openclaw.service unit file changes
+
+[Path]
+PathChanged=/etc/systemd/system/openclaw.service
+PathChanged=/etc/systemd/system/openclaw.service.d/override.conf
+
+[Install]
+WantedBy=multi-user.target

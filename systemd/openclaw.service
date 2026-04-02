@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenClaw Gateway
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/openclaw.env
+Type=simple
+User=clawbot
+WorkingDirectory=/home/clawbot
+# Make sure OpenClaw's npm bin dir is on PATH for this service
+Environment=PATH=/home/clawbot/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/clawbot/.npm-global/bin/openclaw gateway
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

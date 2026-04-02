@@ -1,0 +1,27 @@
+[Unit]
+Description=ClawBot Memory Service (FastAPI + Postgres + Ollama)
+After=network.target postgresql.service
+
+[Service]
+# Run as your normal user
+User=leo-paz
+Group=leo-paz
+
+# Where the app lives
+WorkingDirectory=/home/leo-paz/clawbot_memory
+
+# Point systemd at your venv + normal PATH
+Environment="PATH=/home/leo-paz/memtools/bin:/usr/bin"
+
+# Load the .env with DATABASE_URL + OLLAMA settings
+EnvironmentFile=/home/leo-paz/clawbot_memory/.env
+
+# Start uvicorn from the venv
+ExecStart=/home/leo-paz/memtools/bin/uvicorn memory_service:app --host 127.0.0.1 --port 9001
+
+# Auto-restart if it crashes
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
