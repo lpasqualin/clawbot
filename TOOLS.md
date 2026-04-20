@@ -11,7 +11,7 @@ No doctrine, no routing rules, no strategy — just environment facts.
 |---|---|
 | Model | Venus Series (MS-01) |
 | OS | Ubuntu 24.04.4 LTS |
-| Hostname | `leo-paz-MS-10-Venus` |
+| Hostname | `[HOSTNAME]` |
 | CPU | 6-core Intel |
 | RAM | 32 GB |
 | Storage | NVMe SSD |
@@ -81,9 +81,9 @@ No doctrine, no routing rules, no strategy — just environment facts.
 ### Telegram
 | Field | Value |
 |---|---|
-| Bot | @L30_Clawbot |
+| Bot | [TELEGRAM_HANDLE] |
 | Leo's user ID | [REDACTED] |
-| Leo's handle | @L30_paz |
+| Leo's handle | [TELEGRAM_HANDLE] |
 
 ## Obsidian
 

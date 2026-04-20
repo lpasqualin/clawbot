@@ -1,7 +1,7 @@
 ---
 name: Leo Paz
 role: Principal
-handle: @L30_paz
+handle: [TELEGRAM_HANDLE]
 telegram_id: [REDACTED]
 location: South Florida
 ---

@@ -11,7 +11,7 @@ metadata:
   }
 ---
 # Obsidian
-Obsidian vault at /home/leo-paz/obsidian-vault accessible via Local REST API.
+Obsidian vault at <vault-path> accessible via Local REST API.
 
 ## REST API Access
 Base URL: https://localhost:27124

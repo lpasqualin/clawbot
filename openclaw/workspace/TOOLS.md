@@ -11,7 +11,7 @@ No doctrine, no routing rules, no strategy — just environment facts.
 |---|---|
 | Model | HP ProDesk 600 |
 | OS | Ubuntu 24.04.4 LTS |
-| Hostname | `leo-HP-ProDesk-600` |
+| Hostname | `[HOSTNAME]` |
 | CPU | 6-core Intel |
 | RAM | 32 GB |
 | Storage | NVMe SSD |
@@ -22,8 +22,8 @@ No doctrine, no routing rules, no strategy — just environment facts.
 
 | Name | Address |
 |---|---|
-| Tailscale — ProDesk | 100.118.159.86 |
-| Tailscale — Windows laptop | 100.78.65.107 |
+| Tailscale — ProDesk | [TAILSCALE_IP] |
+| Tailscale — Windows laptop | [TAILSCALE_IP] |
 | RustDesk ID | 379632253 |
 | RustDesk relay | Self-hosted Docker (hbbs / hbbr) — currently DOWN |
 
@@ -75,15 +75,15 @@ No doctrine, no routing rules, no strategy — just environment facts.
 ### Google OAuth
 | Account | Access |
 |---|---|
-| leo.clawbot.1@gmail.com | Full Workspace: Drive, Docs, Sheets, Gmail, Calendar, Contacts |
+| [EMAIL] | Full Workspace: Drive, Docs, Sheets, Gmail, Calendar, Contacts |
 | YOUR_GOOGLE_ACCOUNT | Gmail, Calendar, Contacts only (read+write). No Drive/Docs/Sheets. |
 
 ### Telegram
 | Field | Value |
 |---|---|
-| Bot | @L30_Clawbot |
-| Leo's user ID | YOUR_TELEGRAM_ID |
-| Leo's handle | @L30_paz |
+| Bot | [TELEGRAM_HANDLE] |
+| Leo's user ID | [REDACTED] |
+| Leo's handle | [TELEGRAM_HANDLE] |
 
 ## Obsidian
 
