@@ -3,7 +3,7 @@
 This template is used by ClawBot when delegating work to a specialist agent.
 
 Core rule:
-ClawBot decides, specialists execute, systems of record store truth, Leo approves major decisions and irreversible external actions when required.
+ClawBot decides, specialists execute, systems of record store truth, [OPERATOR] approves major decisions and irreversible external actions when required.
 
 ---
 

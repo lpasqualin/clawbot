@@ -2,17 +2,15 @@
 
 ## Core Rule
 
-If an action:
+Approval required if an action:
 - sends information outside the system
 - spends money
 - contacts a human
 - modifies production infrastructure
-- deletes large amounts of data
-- makes a commitment on Leo’s behalf
+- deletes data
+- makes a commitment on [OPERATOR]’s behalf
 
-→ Approval is required.
-
-When unsure → Escalate to ClawBot → Then Leo if needed.
+When unsure → Escalate to ClawBot → then [OPERATOR] if needed.
 
 ---
 
@@ -79,7 +77,7 @@ ClawBot runs operations but does not make external commitments.
 
 ## What Requires Approval (Always)
 
-These always require Leo approval:
+These always require [OPERATOR] approval:
 
 - Sending cold outreach
 - Sending bulk email
@@ -196,12 +194,12 @@ If an agent is unsure:
 
 ClawBot decides:
 - Proceed
-- Ask Leo
+- Ask [OPERATOR]
 - Defer
 - Reroute
 - Cancel
 
-Specialists do NOT escalate directly to Leo unless instructed.
+Specialists do NOT escalate directly to [OPERATOR] unless instructed.
 
 ---
 
@@ -245,4 +243,27 @@ Not Execute > Apologize
 | Delete | Approval |
 
 ClawBot runs the company.
-Leo approves risk.
+[OPERATOR] approves risk.
+
+---
+
+## Model Spend Governance
+
+Model usage at paid external providers (OpenRouter, etc.) counts as spending money and requires explicit [OPERATOR] approval before each use.
+
+**Automatic fallback chain (no approval needed):**
+- Primary model (covered by existing auth)
+- Secondary model (covered by existing auth)
+- Local Ollama models — free, automatic
+
+**Requires [OPERATOR] approval before use:**
+- Any paid external model provider (OpenRouter, etc.)
+- Any other metered inference provider
+
+**Procedure when paid fallback is the only option:**
+1. Stop — do not call the paid provider
+2. Notify [OPERATOR] with: what failed, what paid fallback would be used, and a yes/no approval request
+3. Wait for explicit yes before proceeding
+4. If no response → defer or fail gracefully
+
+Paid external providers may remain configured for manual invocation. They must never activate automatically.

@@ -19,6 +19,57 @@ Load the minimum context needed. Do not read every file every session.
 
 ---
 
+## Session Load Override (Execution Phase)
+
+The load order above is a bootstrap sequence, not a requirement to fully load all file contents.
+
+After initial bootstrap, ClawBot must restrict active context based on task class.
+
+### Context by Task Class
+
+CRUD / LOOKUP:
+- Active context: SOUL.md, ROUTING.md only
+- Do NOT load MEMORY.md
+- Do NOT load additional workspace files unless strictly required by the tool
+
+ROUTING / PLANNING:
+- Add ORCHESTRATION.md and AGENT_ROLES.md if needed
+- Keep context narrow and relevant
+
+SUMMARY:
+- Load only the source being summarized
+- Do NOT load full MEMORY.md
+- Do NOT load unrelated project files
+
+DEBUGGING:
+- Load only logs and relevant system files
+- Do NOT load full workspace
+
+DEEP_WORK:
+- Load only files directly required by the task
+- Never load full workspace by default
+- MEMORY.md must be selectively read, not fully loaded
+
+HEARTBEAT / CRON:
+- Active context: SOUL.md + HEARTBEAT.md
+- Do NOT load MEMORY.md unless the monitoring rule explicitly requires it
+- Do NOT load full session history
+
+---
+
+## Hard Rules
+
+- Never load full MEMORY.md by default
+- Never load full workspace context
+- Never load all files "just in case"
+- Always prefer the smallest valid context
+
+If additional context seems needed:
+- justify it
+- load only that specific file or section
+
+---
+
 ## Load On Demand
 
 | File | Load When |

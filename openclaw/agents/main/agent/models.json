@@ -58,9 +58,9 @@
       "apiKey": "OPENROUTER_API_KEY"
     },
     "ollama": {
-      "baseUrl": "http://127.0.0.1:11434/v1",
+      "baseUrl": "http://127.0.0.1:11434",
       "apiKey": "ollama-local",
-      "api": "openai-responses",
+      "api": "ollama",
       "models": [
         {
           "id": "qwen3:8b",
@@ -80,7 +80,7 @@
           "compat": {
             "supportsDeveloperRole": false
           },
-          "api": "openai-responses"
+          "api": "ollama"
         },
         {
           "id": "glm4:9b",
@@ -100,7 +100,7 @@
           "compat": {
             "supportsDeveloperRole": false
           },
-          "api": "openai-responses"
+          "api": "ollama"
         },
         {
           "id": "qwen3:1.7b",
@@ -120,7 +120,7 @@
           "compat": {
             "supportsDeveloperRole": false
           },
-          "api": "openai-responses"
+          "api": "ollama"
         },
         {
           "id": "deepseek-r1:14b",
@@ -140,7 +140,7 @@
           "compat": {
             "supportsDeveloperRole": false
           },
-          "api": "openai-responses"
+          "api": "ollama"
         },
         {
           "id": "gemma3:12b",
@@ -160,7 +160,7 @@
           "compat": {
             "supportsDeveloperRole": false
           },
-          "api": "openai-responses"
+          "api": "ollama"
         }
       ]
     },

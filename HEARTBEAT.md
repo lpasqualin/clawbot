@@ -2,14 +2,14 @@
 
 ## Purpose
 
-Heartbeat is ClawBot’s monitoring and risk detection system.
+Heartbeat is ClawBot's monitoring and risk detection system.
 
 Goal:
 - High signal
 - Low noise
 - Alert only when action is required
 - Surface risks before they become problems
-- Keep Leo informed of what actually matters
+- Keep [OPERATOR] informed of what actually matters
 
 ClawBot is responsible for monitoring, interpreting, and escalating.
 
@@ -33,7 +33,7 @@ When something triggers, ClawBot must decide:
 - Add to brief
 - Create task
 - Update memory
-- Alert Leo immediately
+- Alert [OPERATOR] immediately
 
 Heartbeat is not just monitoring — it is decision + escalation.
 
@@ -51,7 +51,7 @@ Trigger:
 Action:
 - Create/Update Todoist task
 - Add to next brief
-- If external commitment is overdue → Alert Leo
+- If external commitment is overdue → Alert [OPERATOR]
 
 ---
 
@@ -64,7 +64,7 @@ Trigger:
 Action:
 - Create/Update Todoist task
 - Add to brief
-- If external or revenue-critical → Alert Leo
+- If external or revenue-critical → Alert [OPERATOR]
 
 ---
 
@@ -75,7 +75,7 @@ Trigger:
 - High-priority task idle for 7+ days
 
 Action:
-- Flag in brief under “Stalled / Needs Attention”
+- Flag in brief under "Stalled / Needs Attention"
 - Do NOT alert unless revenue-critical
 
 ---
@@ -87,7 +87,7 @@ Trigger:
 - Milestone within 2 weeks with no recent activity
 
 Action:
-- Add to brief under “Project Drift”
+- Add to brief under "Project Drift"
 - Suggest next step
 - Create task if none exists
 
@@ -103,8 +103,8 @@ Trigger:
 
 Action:
 - Create Todoist task for Vito / Sales
-- Add to brief under “Revenue Risk”
-- If pipeline empty → Alert Leo
+- Add to brief under "Revenue Risk"
+- If pipeline empty → Alert [OPERATOR]
 
 ---
 
@@ -112,14 +112,28 @@ Action:
 
 Trigger:
 - OpenClaw not running
-- Primary model unavailable
+- Primary model unavailable or failing
+- Fallback chain activating
+- Paid provider would be required as next fallback
 - Cron job missed
 - Integration failing repeatedly
 
 Action:
-- Attempt auto-retry once
-- If still failing → Alert Leo
-- Create task for Tron if fix required
+- Attempt auto-retry once on the primary model
+- If primary still failing → Alert [OPERATOR] immediately (use failover-notify script)
+- If next fallback is a local/free model → continue automatically, include in next brief
+- If next fallback is a paid provider (OpenRouter or other metered) → STOP, do not proceed, alert [OPERATOR] and request explicit approval before using
+- Create task for the systems agent if fix required
+
+**Model failover notification:**
+
+| Situation | Action |
+|---|---|
+| Primary model down, local fallback next | Notify + continue |
+| Primary model down, paid fallback next | Notify + STOP, wait for approval |
+| All local fallbacks exhausted | Notify + STOP, wait for approval |
+
+**Paid provider approval rule:** Any use of paid metered external providers requires explicit [OPERATOR] approval in that session. No silent paid failover. No exceptions.
 
 ---
 
@@ -132,9 +146,9 @@ Trigger:
 
 Action:
 - Retry once
-- If fails again → Task for Tron
+- If fails again → Task for systems agent
 - Add to brief
-- Alert Leo only if blocking operations
+- Alert [OPERATOR] only if blocking operations
 
 ---
 
@@ -150,13 +164,13 @@ Trigger:
 
 Action:
 - Create task for responsible agent
-- Add to brief under “Operations Drift”
+- Add to brief under "Operations Drift"
 
 ---
 
 ## Alert Rules (Very Important)
 
-Alert Leo immediately only if:
+Alert [OPERATOR] immediately only if:
 
 - External commitment missed
 - Revenue opportunity at risk
@@ -164,10 +178,10 @@ Alert Leo immediately only if:
 - Legal/compliance issue
 - Reputation risk
 - Production system down
-- Leo cannot operate normally
+- [OPERATOR] cannot operate normally
 - Irreversible action taken or about to be taken
 
-If Leo cannot take action right now → Do NOT alert → Put in brief.
+If [OPERATOR] cannot take action right now → Do NOT alert → Put in brief.
 
 ---
 
@@ -176,7 +190,7 @@ If Leo cannot take action right now → Do NOT alert → Put in brief.
 - Do not alert on the same issue twice in 24 hours
 - Do not alert on low-priority tasks
 - Do not alert on things already scheduled
-- Do not alert on things Leo already acknowledged
+- Do not alert on things [OPERATOR] already acknowledged
 - Batch low-urgency items into daily brief
 - Every alert must include a recommended action
 
@@ -198,10 +212,27 @@ Heartbeat can produce only these outputs:
 | Task needed | Create Todoist task |
 | Durable risk | Update MEMORY.md |
 | Needs execution | Delegate to agent |
-| Urgent | Alert Leo |
+| Urgent | Alert [OPERATOR] |
 
 Heartbeat does not do execution.
 Heartbeat detects → ClawBot decides → System acts.
+
+---
+
+## Cron Constraints
+
+Recurring jobs are constrained runs.
+
+Rules:
+- Default reasoning is LOW for routine cron jobs
+- SUMMARY-style cron jobs may use MEDIUM if explicitly needed
+- Cron jobs must not self-escalate to HIGH reasoning
+- Load only the minimum context required
+- Do not load MEMORY.md unless the job explicitly depends on it
+- Do not widen scope or branch into adjacent work
+- Maximum 1 retry for transient failure only
+- Do not fall through to paid providers without [OPERATOR] approval
+- If blocked by ambiguity or missing context: fail closed
 
 ---
 
@@ -215,7 +246,5 @@ Heartbeat exists to prevent:
 - System failures
 - Revenue drought
 - Silent failures
-
-Heartbeat is the early warning system for Leo OS.
 
 High signal. Low noise. Actionable alerts only.

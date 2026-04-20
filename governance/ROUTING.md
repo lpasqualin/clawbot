@@ -17,31 +17,31 @@ ClawBot owns routing decisions.
 
 ## Intent → System Decision Tree
 
-When Leo says something, classify it:
+When [OPERATOR] says something, classify it:
 
-Leo says something →
-    Is Leo asking to DO something?
+[OPERATOR] says something →
+    Is [OPERATOR] asking to DO something?
         → Task → Todoist
 
-    Is Leo talking about something happening at a specific time?
+    Is [OPERATOR] talking about something happening at a specific time?
         → Event → Calendar
 
-    Is Leo stating a decision, rule, preference, constraint, or fact?
+    Is [OPERATOR] stating a decision, rule, preference, constraint, or fact?
         → Durable Memory → MEMORY.md
 
-    Is Leo asking to write, plan, document, research, or think deeply?
+    Is [OPERATOR] asking to write, plan, document, research, or think deeply?
         → Long-form → Obsidian
 
-    Is Leo asking to generate, export, or create a file?
+    Is [OPERATOR] asking to generate, export, or create a file?
         → Artifact → Workspace
 
-    Is Leo asking for status, priorities, or what to work on?
+    Is [OPERATOR] asking for status, priorities, or what to work on?
         → Brief / Status → Read systems, do not store
 
-    Is Leo identifying a risk, drift, or something to monitor?
+    Is [OPERATOR] identifying a risk, drift, or something to monitor?
         → Risk → MEMORY.md (Open Loops) + HEARTBEAT monitoring
 
-    Is Leo asking to contact or message someone?
+    Is [OPERATOR] asking to contact or message someone?
         → Communication → Draft → Approval → Send
 
 If unclear → Ask:
@@ -134,4 +134,84 @@ When in doubt:
 Classify → Route → Then act.
 
 Routing mistakes create system chaos.
-Routing correctly keeps Leo OS clean.
+Routing correctly keeps the system clean.
+
+---
+
+## Task Classes
+
+Every task must be classified before execution.
+
+| Class | Description | Reasoning | Tool Scope |
+|-------|-------------|-----------|-----------|
+| CRUD | Create/update/delete in a system | low | one system only |
+| LOOKUP | Read/check information | low | read-only, single system |
+| ROUTING | Decide where work goes | low | no tools |
+| SUMMARY | Condense or summarize content | medium | source only |
+| PLANNING | Break down work or next steps | medium | optional |
+| DEBUGGING | Investigate failures or issues | high | logs + relevant tools |
+| DEEP_WORK | Strategy, architecture, complex reasoning | high | selective |
+
+---
+
+## Tool Scope Rule
+
+Only expose tools required for the classified task.
+
+- Do NOT load the full toolset
+- Do NOT use multiple systems for CRUD
+- Do NOT expand tool usage mid-task
+
+Examples:
+- Todoist task → only Todoist tools
+- Calendar lookup → only Calendar read
+- Debugging → logs + system tools only
+
+More tools = more confusion.
+
+---
+
+## Classification Stability Rule
+
+Classify once before execution.
+
+- Do NOT silently upgrade task class mid-run
+- Do NOT escalate from CRUD → DEEP_WORK automatically
+
+If task appears more complex than expected:
+- STOP
+- Report mismatch
+- Ask or retry with correct class
+
+---
+
+## One-System Rule (CRUD)
+
+CRUD tasks must operate on ONE system only.
+
+- Do NOT chain actions across systems
+- Do NOT "also update" other systems unless explicitly asked
+
+Example:
+"Create Todoist task" → only Todoist
+NOT → Todoist + Calendar + Memory
+
+---
+
+## Failure Rule
+
+If correct tool, system, or classification is unclear:
+
+- Do NOT compensate by expanding scope
+- Do NOT load more tools or context
+- STOP and ask a focused question
+
+---
+
+When in doubt: Classify → Route → Act.
+
+If ambiguity materially affects correctness, safety, or external impact:
+→ ask [OPERATOR]
+
+If system, tool, or classification is unclear:
+→ STOP, do not expand scope or context
