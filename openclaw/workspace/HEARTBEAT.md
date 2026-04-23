@@ -112,14 +112,28 @@ Action:
 
 Trigger:
 - OpenClaw not running
-- Primary model unavailable
+- Primary model unavailable or failing
+- Fallback chain activating
+- Paid provider would be required as next fallback
 - Cron job missed
 - Integration failing repeatedly
 
 Action:
-- Attempt auto-retry once
-- If still failing → Alert Leo
+- Attempt auto-retry once on the primary model
+- If primary still failing → Alert Leo immediately (use failover-notify.sh)
+- If next fallback is a local/free Ollama model → continue automatically, include in next brief
+- If next fallback is a paid provider (OpenRouter or other metered) → STOP, do not proceed, alert Leo and request explicit approval before using
 - Create task for Tron if fix required
+
+**Model failover notification (via `/home/clawbot/.openclaw/failover-notify.sh`):**
+
+| Situation | Script event arg | Action |
+|---|---|---|
+| Primary model down, local fallback next | `fallback_active` | Notify + continue |
+| Primary model down, paid fallback next | `model_failed` with `is_paid=1` | Notify + STOP, wait for approval |
+| All local fallbacks exhausted | `paid_fallback_required` | Notify + STOP, wait for approval |
+
+**Paid provider approval rule:** Any use of OpenRouter or other metered external providers requires explicit Leo approval in that session. No silent paid fallover. No exceptions.
 
 ---
 
@@ -204,6 +218,21 @@ Heartbeat does not do execution.
 Heartbeat detects → ClawBot decides → System acts.
 
 ---
+
+## Cron Constraints
+
+Recurring jobs are constrained runs.
+
+Rules:
+- Default reasoning is LOW for routine cron jobs
+- SUMMARY-style cron jobs may use MEDIUM if explicitly needed
+- Cron jobs must not self-escalate to HIGH reasoning
+- Load only the minimum context required
+- Do not load MEMORY.md unless the job explicitly depends on it
+- Do not widen scope or branch into adjacent work
+- Maximum 1 retry for transient failure only
+- Do not fall through to paid providers without Leo approval
+- If blocked by ambiguity or missing context: fail closed
 
 ## Philosophy
 
